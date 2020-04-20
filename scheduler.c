@@ -1,4 +1,5 @@
 #define _GNU_SOURCE
+#include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
 #include "utils.h"
@@ -6,6 +7,9 @@
 #include "priority.h"
 
 int main(){
+    use_cpu(getpid(), 0);
+    set_priority(getpid(), SCHED_FIFO, PRIORITY_INIT);
+
     char policy[MAX_NAME_LEN];
     scanf("%s", policy);
     int n, ready_time[MAX_N], execution_time[MAX_N];
