@@ -17,7 +17,7 @@ int main(){
     char name[MAX_N][MAX_NAME_LEN];
 
     for(int i = 0; i < n; i ++)
-        scanf("%s %d %d", &name[i], &ready_time[i], &execution_time[i]);
+        scanf("%s %d %d", name[i], &ready_time[i], &execution_time[i]);
     
     int waiting_queue[MAX_N][MAX_FEATURES];
     for(int i = 0; i < n; i ++){

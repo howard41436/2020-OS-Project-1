@@ -6,7 +6,7 @@
 #include "utils.h"
 #include "policy.h"
 #include "priority.h"
-void pop(int *queue, int *size){
+void pop(int queue[MAX_N][MAX_FEATURES], int *size){
     for(int i = 0; i < *size - 1; i ++)
         for(int j = 0; j < MAX_FEATURES; j ++)
             queue[i][j] = queue[i + 1][j];
@@ -24,7 +24,7 @@ int compare(int *a, int *b, int *key){
     }
 }
 
-void sort(int n, int *ary, int *key){
+void sort(int n, int ary[MAX_N][MAX_FEATURES], int *key){
     for(int i = 0; i < n - 1; i ++){
         for(int j = 0; j < n - i - 1; j ++)
             if(!compare(ary[j], ary[j + 1], key))
@@ -36,7 +36,8 @@ void sort(int n, int *ary, int *key){
     }
 }
 
-void FIFO(int n, char *name, int *waiting_queue, int *execution_time){
+void FIFO(int n, char name[MAX_N][MAX_NAME_LEN],
+          int waiting_queue[MAX_N][MAX_FEATURES], int *execution_time);
     int waiting_key[MAX_FEATURES] = {1, 0, -1};
     int ready_key[MAX_FEATURES] = {1, 0, -1};
     int wq_size = n, rq_size = 0;
