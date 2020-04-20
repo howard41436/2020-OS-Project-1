@@ -5,6 +5,7 @@
 #include <sched.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "priority.h"
 
 void use_cpu(pid_t pid, int x){
     cpu_set_t mask;

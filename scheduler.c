@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <sched.h>
 #include "utils.h"
 #include "policy.h"
 #include "priority.h"
