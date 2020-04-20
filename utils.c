@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <sched.h>
 #include <time.h>
+#include <stdlib.h>
 #include "utils.h"
 #include "priority.h"
 
