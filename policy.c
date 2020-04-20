@@ -37,7 +37,7 @@ void sort(int n, int ary[MAX_N][MAX_FEATURES], int *key){
 }
 
 void FIFO(int n, char name[MAX_N][MAX_NAME_LEN],
-          int waiting_queue[MAX_N][MAX_FEATURES], int *execution_time);
+          int waiting_queue[MAX_N][MAX_FEATURES], int *execution_time){
     int waiting_key[MAX_FEATURES] = {1, 0, -1};
     int ready_key[MAX_FEATURES] = {1, 0, -1};
     int wq_size = n, rq_size = 0;
