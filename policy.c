@@ -86,3 +86,15 @@ void FIFO(int n, char name[MAX_N][MAX_NAME_LEN],
     for(int i = 0; i < n; i ++)
         printf("%s %d\n", name[i], pids[i]);
 }
+
+void RR(int n, char name[MAX_N][MAX_NAME_LEN],
+          int waiting_queue[MAX_N][MAX_FEATURES], int *execution_time){
+}
+
+void SJF(int n, char name[MAX_N][MAX_NAME_LEN],
+          int waiting_queue[MAX_N][MAX_FEATURES], int *execution_time){
+}
+
+void PSJF(int n, char name[MAX_N][MAX_NAME_LEN],
+          int waiting_queue[MAX_N][MAX_FEATURES], int *execution_time){
+}
