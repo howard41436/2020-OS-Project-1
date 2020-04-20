@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <sched.h>
+#include <stdlib.h>
 #include <string.h>
 #include "utils.h"
 #include "policy.h"

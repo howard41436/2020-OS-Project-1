@@ -1,6 +1,8 @@
 #define _GNU_SOURCE
+#include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <sched.h>
 #include <time.h>
 #include "utils.h"
 #include "priority.h"

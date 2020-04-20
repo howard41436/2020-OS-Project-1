@@ -8,3 +8,4 @@
 
 void unit_time();
 long get_time();
+int create_process(char *name, int T);
