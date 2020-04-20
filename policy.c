@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <sched.h>
 #include <string.h>
 #include "utils.h"
 #include "policy.h"
@@ -56,7 +57,8 @@ void FIFO(int n, char name[MAX_N][MAX_NAME_LEN],
         }
         if(t == cur_finish_time){
             if(execution_time[cur_i] == 0){
-                wait(pids[cur_i]);
+                int stat;
+                waitpid(pids[cur_i], &stat, 0);
                 if(!wq_size && !rq_size)
                     break;
                 cur_i = cur_finish_time = -1;
