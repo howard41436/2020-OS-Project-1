@@ -5,3 +5,6 @@ process: process.c
 
 scheduler: scheduler.c
 	gcc scheduler.c utils.c priority.c policy.c -o scheduler -O2
+
+clean:
+	rm process scheduler
