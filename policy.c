@@ -13,7 +13,7 @@ void pop(int queue[MAX_N][MAX_FEATURES], int *size){
     for(int i = 0; i < *size - 1; i ++)
         for(int j = 0; j < MAX_FEATURES; j ++)
             queue[i][j] = queue[i + 1][j];
-    *size --;
+    (*size) --;
 }
 
 int compare(int *a, int *b, int *key){
@@ -49,8 +49,11 @@ void FIFO(int n, char name[MAX_N][MAX_NAME_LEN],
     pid_t pids[MAX_N] = {};
     int cur_i = -1, cur_finish_time = -1;
     for(int t = 0;;t ++){
+        if(t % 100 == 0)
+            fprintf(stderr, "t = %d, wq_size = %d, rq_size = %d\n", t, wq_size, rq_size);
         while(wq_size && waiting_queue[0][1] == t){
             // push
+            //printf("move from wq to rq %d %d\n", wq_size, rq_size);
             ready_queue[rq_size][0] = waiting_queue[0][0];
             ready_queue[rq_size][1] = waiting_queue[0][1];
             ready_queue[rq_size][2] = waiting_queue[0][2];
@@ -66,15 +69,18 @@ void FIFO(int n, char name[MAX_N][MAX_NAME_LEN],
                 cur_i = cur_finish_time = -1;
             }
         }
-        if(~cur_i && rq_size){
+        if(!~cur_i && rq_size){
             sort(rq_size, ready_queue, ready_key);
             int i = ready_queue[0][0];
             int R = ready_queue[0][1], T = ready_queue[0][2];
             pop(ready_queue, &rq_size);
             cur_i = i, cur_finish_time = t + T;
             if(!pids[cur_i]){
+                fprintf(stderr, "creating\n");
                 pid_t pid = create_process(name[cur_i], T);
+                // pid_t pid = 4000;
                 pids[cur_i] = pid;
+                fprintf(stderr, "created %d\n", pid);
             }
         }
         if(~cur_i){

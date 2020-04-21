@@ -15,7 +15,7 @@ int main(){
     scanf("%s", policy);
     int n, ready_time[MAX_N], execution_time[MAX_N];
     char name[MAX_N][MAX_NAME_LEN];
-
+    scanf("%d", &n);
     for(int i = 0; i < n; i ++)
         scanf("%s %d %d", name[i], &ready_time[i], &execution_time[i]);
     
@@ -25,7 +25,6 @@ int main(){
         waiting_queue[i][1] = ready_time[i];
         waiting_queue[i][2] = execution_time[i];
     }
-
     if(policy[0] == 'F')
         FIFO(n, name, waiting_queue, execution_time);
     else if(policy[0] == 'R')
