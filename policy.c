@@ -210,7 +210,7 @@ void SJF(int n, char name[MAX_N][MAX_NAME_LEN],
             set_priority(pids[cur_i], SCHED_FIFO, PRIORITY_HIGH);
         }
         unit_time();
-    }
+    } 
     for(int i = 0; i < n; i ++)
         printf("%s %d\n", name[i], pids[i]);
 }
