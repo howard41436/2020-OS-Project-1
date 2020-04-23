@@ -231,7 +231,7 @@ void PSJF(int n, char name[MAX_N][MAX_NAME_LEN],
             // push
             //printf("move from wq to rq %d %d\n", wq_size, rq_size);
             if(~cur_i && waiting_queue[0][2] < cur_finish_time - t){
-                ready_queue[rq_size][0] = i;
+                ready_queue[rq_size][0] = cur_i;
                 ready_queue[rq_size][1] = -1;
                 ready_queue[rq_size][2] = cur_finish_time - t;
                 ready_queue[rq_size][3] = t;
