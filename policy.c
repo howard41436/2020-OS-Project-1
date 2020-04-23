@@ -162,6 +162,57 @@ void RR(int n, char name[MAX_N][MAX_NAME_LEN],
 
 void SJF(int n, char name[MAX_N][MAX_NAME_LEN],
           int waiting_queue[MAX_N][MAX_FEATURES], int *execution_time){
+    int waiting_key[MAX_FEATURES] = {1, 2, 0, -1};
+    int ready_key[MAX_FEATURES] = {2, 3, 1, 0, -1};
+    int wq_size = n, rq_size = 0;
+    sort(wq_size, waiting_queue, waiting_key);
+    int ready_queue[MAX_N][MAX_FEATURES];
+    pid_t pids[MAX_N] = {};
+    int cur_i = -1, cur_finish_time = -1;
+    for(int t = 0;;t ++){
+        //if(t % 100 == 0)
+            //fprintf(stderr, "t = %d, wq_size = %d, rq_size = %d\n", t, wq_size, rq_size);
+        while(wq_size && waiting_queue[0][1] == t){
+            // push
+            //printf("move from wq to rq %d %d\n", wq_size, rq_size);
+            ready_queue[rq_size][0] = waiting_queue[0][0];
+            ready_queue[rq_size][1] = waiting_queue[0][1];
+            ready_queue[rq_size][2] = waiting_queue[0][2];
+            ready_queue[rq_size][3] = -1;
+            rq_size ++;
+            pop(waiting_queue, &wq_size);
+        }
+        if(t == cur_finish_time){
+            if(execution_time[cur_i] == 0){
+                int stat;
+                waitpid(pids[cur_i], &stat, 0);
+                if(!wq_size && !rq_size)
+                    break;
+                cur_i = cur_finish_time = -1;
+            }
+        }
+        if(!~cur_i && rq_size){
+            sort(rq_size, ready_queue, ready_key);
+            int i = ready_queue[0][0];
+            int R = ready_queue[0][1], T = ready_queue[0][2];
+            pop(ready_queue, &rq_size);
+            cur_i = i, cur_finish_time = t + T;
+            if(!pids[cur_i]){
+                //fprintf(stderr, "creating\n");
+                pid_t pid = create_process(name[cur_i], T);
+                // pid_t pid = 4000;
+                pids[cur_i] = pid;
+                //fprintf(stderr, "created %d\n", pid);
+            }
+        }
+        if(~cur_i){
+            execution_time[cur_i] --;
+            set_priority(pids[cur_i], SCHED_FIFO, PRIORITY_HIGH);
+        }
+        unit_time();
+    }
+    for(int i = 0; i < n; i ++)
+        printf("%s %d\n", name[i], pids[i]);
 }
 
 void PSJF(int n, char name[MAX_N][MAX_NAME_LEN],
