@@ -49,8 +49,8 @@ void FIFO(int n, char name[MAX_N][MAX_NAME_LEN],
     pid_t pids[MAX_N] = {};
     int cur_i = -1, cur_finish_time = -1;
     for(int t = 0;;t ++){
-        if(t % 100 == 0)
-            fprintf(stderr, "t = %d, wq_size = %d, rq_size = %d\n", t, wq_size, rq_size);
+        //if(t % 100 == 0)
+            //fprintf(stderr, "t = %d, wq_size = %d, rq_size = %d\n", t, wq_size, rq_size);
         while(wq_size && waiting_queue[0][1] == t){
             // push
             //printf("move from wq to rq %d %d\n", wq_size, rq_size);
@@ -76,11 +76,11 @@ void FIFO(int n, char name[MAX_N][MAX_NAME_LEN],
             pop(ready_queue, &rq_size);
             cur_i = i, cur_finish_time = t + T;
             if(!pids[cur_i]){
-                fprintf(stderr, "creating\n");
+                //fprintf(stderr, "creating\n");
                 pid_t pid = create_process(name[cur_i], T);
                 // pid_t pid = 4000;
                 pids[cur_i] = pid;
-                fprintf(stderr, "created %d\n", pid);
+                //fprintf(stderr, "created %d\n", pid);
             }
         }
         if(~cur_i){
@@ -103,8 +103,8 @@ void RR(int n, char name[MAX_N][MAX_NAME_LEN],
     pid_t pids[MAX_N] = {};
     int cur_i = -1, cur_finish_time = -1, time_quantum = 500;
     for(int t = 0;;t ++){
-        if(t % 100 == 0)
-            fprintf(stderr, "t = %d, wq_size = %d, rq_size = %d\n", t, wq_size, rq_size);
+        //if(t % 100 == 0)
+            //fprintf(stderr, "t = %d, wq_size = %d, rq_size = %d\n", t, wq_size, rq_size);
         while(wq_size && waiting_queue[0][1] == t){
             // push
             //printf("move from wq to rq %d %d\n", wq_size, rq_size);
@@ -143,11 +143,11 @@ void RR(int n, char name[MAX_N][MAX_NAME_LEN],
                 rq_size ++;
             }
             if(!pids[cur_i]){
-                fprintf(stderr, "creating\n");
+                //fprintf(stderr, "creating\n");
                 pid_t pid = create_process(name[cur_i], T);
                 // pid_t pid = 4000;
                 pids[cur_i] = pid;
-                fprintf(stderr, "created %d\n", pid);
+                //fprintf(stderr, "created %d\n", pid);
             }
         }
         if(~cur_i){
